@@ -9,7 +9,8 @@ export interface LoginData {
 
 export interface LoginContextData {
 	loginData: LoginData;
-	setLoginData: (loginData: LoginData) => void;
+	setToken: (loginData: string) => void;
+	setUser: (user: User | null) => void;
 }
 
 export default createContext<LoginContextData>({
@@ -18,5 +19,6 @@ export default createContext<LoginContextData>({
 		user: null,
 		token: '',
 	},
-	setLoginData: () => {},
+	setToken: () => {},
+	setUser: () => {},
 });

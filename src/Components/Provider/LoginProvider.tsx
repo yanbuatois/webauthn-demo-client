@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import LoginContext, { LoginData } from '../../Context/LoginContext';
-import { setToken } from '../../Utils/getToken';
+import getToken, { setToken } from '../../Utils/getToken';
+import User from '../../Model/User';
 
 export interface LoginProviderProps {
 	children: React.ReactNode;
@@ -10,24 +11,34 @@ export default function LoginProvider({
 	children,
 }: LoginProviderProps): JSX.Element {
 	const [loginData, setLoginDataState] = useState<LoginData>({
-		logged: false,
+		logged: !!getToken(),
 		user: null,
-		token: '',
+		token: getToken(),
 	});
 
-	const setLoginData = useCallback((data: LoginData) => {
-		const { token } = data;
-
+	const setTokenCallback = useCallback((token: string) => {
 		setToken(token);
 
-		setLoginDataState(data);
+		setLoginDataState((previousLoginDataState) => ({
+			...previousLoginDataState,
+			token,
+			logged: !!token,
+		}));
+	}, []);
+
+	const setUser = useCallback((user: User | null) => {
+		setLoginDataState((previousLoginDataState) => ({
+			...previousLoginDataState,
+			user,
+		}));
 	}, []);
 
 	return (
 		<LoginContext.Provider
 			value={{
 				loginData,
-				setLoginData,
+				setToken: setTokenCallback,
+				setUser,
 			}}
 		>
 			{children}

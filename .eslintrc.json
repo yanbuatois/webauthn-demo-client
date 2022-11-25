@@ -32,7 +32,14 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
 		"@typescript-eslint/no-empty-function": "off",
-		"react/prop-types": "off"
+		"react/prop-types": "off",
+		"@typescript-eslint/strict-boolean-expressions": "off",
+		"@typescript-eslint/no-misused-promises": [
+			"error",
+			{
+				"checkVoidReturn": false
+			}
+		]
     },
     "settings": {
         "import/resolver": {

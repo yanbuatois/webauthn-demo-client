@@ -1,9 +1,8 @@
-let storedToken = '';
-
 export function setToken(token: string): void {
-	storedToken = token;
+	console.log(token);
+	localStorage.setItem('token', token);
 }
 
 export default function getToken(): string {
-	return storedToken;
+	return localStorage.getItem('token') ?? '';
 }
