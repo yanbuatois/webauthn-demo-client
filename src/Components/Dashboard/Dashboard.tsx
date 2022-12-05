@@ -1,6 +1,6 @@
 import Menu from './Menu/Menu';
 import {
-	BrowserRouter,
+	HashRouter,
 	Navigate,
 	redirect,
 	Route,
@@ -45,7 +45,7 @@ export default function Dashboard(): JSX.Element {
 	return loading ? (
 		<CircularProgress />
 	) : (
-		<BrowserRouter>
+		<HashRouter>
 			<Menu />
 			<Container>
 				<Routes>
@@ -67,6 +67,6 @@ export default function Dashboard(): JSX.Element {
 					)}
 				</Routes>
 			</Container>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
